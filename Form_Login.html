@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./Form_login.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <form action="" method="POST" class="form" id="form-1">
+      <h3 class="heading">Thành viên đăng ký</h3>
+      <p class="desc">Cùng nhau học lập trình miễn phí tại F8 💋</p>
+
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="fullname" class="form-label">Tên đầy đủ</label>
+        <input id="fullname" name="fullname" type="text" placeholder="VD: Nguyễn Văn A" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
+          class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group horizontal">
+        <label for="password_confirmation" class="form-label">Giới Tính</label>
+        <div>
+          <input name="gender" type="checkbox" value="male" class="form-control">
+          Nam
+        </div>
+        <div>
+          <input name="gender" type="checkbox" value="female" class="form-control">
+          Nữ
+        </div>
+        <div>
+          <input name="gender" type="checkbox" value="other" class="form-control">
+          Khác
+        </div>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="hobby" class="form-label">Sở thích</label>
+        <select id="hobby" name="hobby" class="form-control">
+          <option value="">Sở thích của bạn: </option>
+          <option value="eat">Ăn uống </option>
+          <option value="sleep">Ngủ </option>
+          <option value="code">Lập trình</option>
+        </select>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="avatar" class="form-label">Ảnh đại diện</label>
+        <input id="avatar" name="avatar"  type="file" class="form-control">
+        <span class="form-message"></span>
+      </div>
+      <button class="form-submit">Đăng ký</button>
+    </form>
+
+  </div>
+
+  <script src="./Form_Login.js"></script>
+  <script>
+    Validator({
+      form: "#form-1",
+      formGroupSelector: ".form-group",
+      errorSelector: ".form-message",
+      rules: [
+        Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ!'),
+        Validator.isRequired('#email'),
+        Validator.isEmail('#email', 'Vui lòng nhập chính xác E-mail '),
+        Validator.minLength('#password', 6),
+        Validator.isRequired('#password_confirmation'),
+        Validator.isRequired('input[name="gender"]'),
+        Validator.isRequired('#hobby'),
+        Validator.isRequired('#avatar'),
+        Validator.isConfirmed('#password_confirmation', () => {
+          return document.querySelector('#form-1 #password').value
+        }, 'Mật Khẩu nhập lại không chính xác'),
+      ],
+      onSubmit: (data) => {
+        // jsonData = JSON.stringify(data)
+        // console.log(jsonData)
+        console.log(data)
+      }
+    });
+  </script>
+</body>
+
+</html>
